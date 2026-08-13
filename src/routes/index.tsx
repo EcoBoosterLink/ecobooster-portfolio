@@ -1,11 +1,46 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { HorizontalScrollCarousel } from '../components/ui/HorizontalScrollCarousel'
 
 export const Route = createFileRoute('/')({
   component: Index,
 })
 
+const METHODOLOGY_DATA = {
+  web: [
+    { id: '01', title: 'Audit & Maquettage', desc: "Nous analysons vos besoins et concevons des prototypes interactifs pour valider l'ergonomie avant toute ligne de code." },
+    { id: '02', title: 'Développement Sur-mesure', desc: "Nos ingénieurs créent une architecture robuste, rapide et sécurisée, en utilisant les meilleurs frameworks modernes (React, Node.js)." },
+    { id: '03', title: 'Tests & Déploiement', desc: "Phase de recette rigoureuse pour garantir l'absence de bugs, suivie d'une mise en production fluide." },
+  ],
+  mobile: [
+    { id: '01', title: 'UX/UI Design Natif', desc: "Conception d'interfaces fluides respectant les guidelines strictes d'Apple (Human Interface) et de Google (Material Design)." },
+    { id: '02', title: 'Développement iOS/Android', desc: "Programmation des fonctionnalités avec une attention maniaque aux performances, à la fluidité et à la gestion de la batterie." },
+    { id: '03', title: 'Lancement sur les Stores', desc: "Gestion des soumissions App Store et Google Play, avec optimisations ASO pour une visibilité immédiate." },
+  ],
+  marketing: [
+    { id: '01', title: "Stratégie d'Acquisition", desc: "Identification de vos cibles, définition des canaux rentables et budgétisation précise de vos futures campagnes." },
+    { id: '02', title: 'Création de Contenu', desc: "Production de visuels, vidéos et copywriting percutants conçus spécifiquement pour maximiser le taux de clic." },
+    { id: '03', title: 'Optimisation du ROI', desc: "Suivi quotidien des métriques, itérations en temps réel et scaling budgétaire des campagnes qui performent le mieux." },
+  ],
+  formation: [
+    { id: '01', title: 'Évaluation des Besoins', desc: "Audit des compétences actuelles de vos équipes pour concevoir un programme de formation ultra-personnalisé." },
+    { id: '02', title: 'Ateliers Pratiques', desc: "Apprentissage basé sur le \"learning-by-doing\" avec des cas concrets applicables immédiatement à votre entreprise." },
+    { id: '03', title: 'Suivi & Ancrage', desc: "Accompagnement post-formation pour valider les acquis et ancrer les nouvelles méthodologies sur le long terme." },
+  ]
+}
+
+type TabType = keyof typeof METHODOLOGY_DATA
+const TABS: { id: TabType; label: string }[] = [
+  { id: 'web', label: 'Développement Web' },
+  { id: 'mobile', label: 'Applications Mobiles' },
+  { id: 'marketing', label: 'Marketing Digital' },
+  { id: 'formation', label: 'Formation & Conseil' },
+]
+
 function Index() {
+  const [activeTab, setActiveTab] = useState<TabType>('web')
+
   return (
     <div className="flex flex-col items-center w-full">
       {/* HERO SECTION */}
@@ -102,6 +137,43 @@ function Index() {
             <div className="absolute -left-6 -bottom-6 w-32 h-32 rounded-full border-[12px] border-primary/5 group-hover:scale-150 transition-transform duration-700 ease-out" />
           </div>
 
+        </div>
+      </section>
+
+      {/* METHODOLOGY SECTION (TABS) */}
+      <section className="w-full max-w-screen-2xl px-6 py-32 flex flex-col items-center">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Notre Approche</h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Une méthodologie éprouvée et transparente, adaptée à chaque type de projet pour garantir des résultats exceptionnels.
+          </p>
+        </div>
+
+        {/* TABS HEADER */}
+        <div className="flex flex-wrap justify-center gap-2 mb-16 bg-secondary/20 p-1.5 rounded-full border border-white/5 backdrop-blur-md">
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`relative px-6 py-3 rounded-full text-sm font-medium transition-colors ${
+                activeTab === tab.id ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {activeTab === tab.id && (
+                <motion.div
+                  layoutId="active-tab-indicator"
+                  className="absolute inset-0 bg-secondary rounded-full shadow-sm border border-white/10"
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10">{tab.label}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* TABS CONTENT - HORIZONTAL STICKY SCROLL */}
+        <div className="w-full mt-10">
+          <HorizontalScrollCarousel cards={METHODOLOGY_DATA[activeTab]} />
         </div>
       </section>
     </div>
