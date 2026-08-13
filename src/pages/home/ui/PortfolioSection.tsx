@@ -32,26 +32,31 @@ const PROJECTS = [
   }
 ]
 
-// Different layout configurations for the 4 projects
-// Each array represents the column span (out of 12) for each project in order
-const LAYOUT_STATES = [
-  ["md:col-span-8", "md:col-span-4", "md:col-span-4", "md:col-span-8"], // Layout 1: Asymmetrical
-  ["md:col-span-4", "md:col-span-8", "md:col-span-8", "md:col-span-4"], // Layout 2: Inverted asymmetrical
-  ["md:col-span-6", "md:col-span-6", "md:col-span-6", "md:col-span-6"], // Layout 3: Equal grid
+// Valid combinations that sum to 12 for a row
+const ROW_COMBINATIONS = [
+  ["md:col-span-8", "md:col-span-4"],
+  ["md:col-span-4", "md:col-span-8"],
+  ["md:col-span-6", "md:col-span-6"],
+  ["md:col-span-7", "md:col-span-5"],
+  ["md:col-span-5", "md:col-span-7"],
 ]
 
-export function PortfolioSection() {
-  const [layoutIndex, setLayoutIndex] = useState(0)
+function generateRandomLayout() {
+  const row1 = ROW_COMBINATIONS[Math.floor(Math.random() * ROW_COMBINATIONS.length)]
+  const row2 = ROW_COMBINATIONS[Math.floor(Math.random() * ROW_COMBINATIONS.length)]
+  return [...row1, ...row2]
+}
 
-  // Cycle through layout states every 4 seconds
+export function PortfolioSection() {
+  const [currentLayout, setCurrentLayout] = useState(generateRandomLayout())
+
+  // Randomize layout every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setLayoutIndex((prev) => (prev + 1) % LAYOUT_STATES.length)
+      setCurrentLayout(generateRandomLayout())
     }, 4000)
     return () => clearInterval(interval)
   }, [])
-
-  const currentLayout = LAYOUT_STATES[layoutIndex]
 
   return (
     <section className="w-full py-32 flex flex-col items-center overflow-hidden">
@@ -87,7 +92,7 @@ function ProjectCard({ project, index, gridClass }: { project: typeof PROJECTS[0
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ layout: { type: "spring", stiffness: 60, damping: 15 }, opacity: { duration: 0.8, delay: index * 0.15 }, scale: { duration: 0.8, delay: index * 0.15 } }}
-      className={`relative w-full h-full rounded-[2.5rem] overflow-hidden group cursor-pointer ${gridClass}`}
+      className={`relative w-full h-full overflow-hidden group cursor-pointer ${gridClass}`}
     >
       {/* Background Image with Parallax/Scale effect on hover */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
