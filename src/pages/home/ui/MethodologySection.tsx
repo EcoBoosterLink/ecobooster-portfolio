@@ -2,42 +2,16 @@ import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { HorizontalScrollCarousel } from './HorizontalScrollCarousel'
 import { METHODOLOGY_DATA, TABS, type TabType } from '../helpers/constants'
-import { type CardType } from './HorizontalScrollCarousel/types'
 
 export function MethodologySection() {
   const [activeTab, setActiveTab] = useState<TabType>('web')
 
-  const allCards = useMemo(() => {
-    const flat: (CardType & { tabId: TabType })[] = []
-    TABS.forEach(tab => {
-      METHODOLOGY_DATA[tab.id].forEach(card => {
-        flat.push({ ...card, tabId: tab.id })
-      })
-    })
-    return flat
-  }, [])
-
-  const handleActiveIndexChange = (index: number) => {
-    const card = allCards[index]
-    if (card && card.tabId !== activeTab) {
-      setActiveTab(card.tabId)
-    }
-  }
-
-  const handleTabClick = (tabId: TabType) => {
-    setActiveTab(tabId)
-    const firstIndex = allCards.findIndex(c => c.tabId === tabId)
-    if (firstIndex !== -1) {
-      const el = document.getElementById('methodology-carousel')
-      if (el) {
-        // The container uses 100vh per card, so we scroll down to the index
-        window.scrollTo({
-          top: el.offsetTop + firstIndex * window.innerHeight,
-          behavior: 'smooth'
-        })
-      }
-    }
-  }
+  const activeCards = useMemo(() => {
+    return METHODOLOGY_DATA[activeTab].map(card => ({
+      ...card,
+      tabId: activeTab
+    }))
+  }, [activeTab])
 
   return (
     <section className="w-full max-w-screen-2xl px-6 py-32 flex flex-col items-center">
@@ -53,7 +27,7 @@ export function MethodologySection() {
         {TABS.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => handleTabClick(tab.id)}
+            onClick={() => setActiveTab(tab.id)}
             className={`relative px-6 py-3 rounded-full text-sm font-medium transition-colors ${
               activeTab === tab.id ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
             }`}
@@ -72,7 +46,7 @@ export function MethodologySection() {
 
       {/* TABS CONTENT - HORIZONTAL STICKY SCROLL */}
       <div className="w-full mt-10">
-        <HorizontalScrollCarousel cards={allCards} onActiveIndexChange={handleActiveIndexChange} />
+        <HorizontalScrollCarousel cards={activeCards} />
       </div>
     </section>
   )
