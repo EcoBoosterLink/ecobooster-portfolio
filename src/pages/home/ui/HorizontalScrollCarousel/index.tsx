@@ -3,11 +3,17 @@ import { Card } from './components/Card'
 import { type CardType } from './types'
 import { useCarouselScroll } from '../../hooks/useCarouselScroll'
 
-export const HorizontalScrollCarousel = ({ cards }: { cards: CardType[] }) => {
-  const { targetRef, activeIndex, xTranslation } = useCarouselScroll(cards.length)
+export const HorizontalScrollCarousel = ({ 
+  cards, 
+  onActiveIndexChange 
+}: { 
+  cards: CardType[]
+  onActiveIndexChange?: (index: number) => void
+}) => {
+  const { targetRef, activeIndex, xTranslation } = useCarouselScroll(cards.length, onActiveIndexChange)
 
   return (
-    <section ref={targetRef} className="relative w-full" style={{ height: `${cards.length * 100}vh` }}>
+    <section id="methodology-carousel" ref={targetRef} className="relative w-full" style={{ height: `${cards.length * 100}vh` }}>
       <style>{`
         html {
           scroll-snap-type: y proximity;

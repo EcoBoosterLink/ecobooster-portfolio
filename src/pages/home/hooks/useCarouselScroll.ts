@@ -1,7 +1,7 @@
 import { useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
 import { useRef, useState } from 'react'
 
-export const useCarouselScroll = (cardsLength: number) => {
+export const useCarouselScroll = (cardsLength: number, onIndexChange?: (index: number) => void) => {
   const targetRef = useRef<HTMLDivElement | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   
@@ -13,7 +13,11 @@ export const useCarouselScroll = (cardsLength: number) => {
   const scrollIndex = useTransform(scrollYProgress, [0, 1], [0, Math.max(0, cardsLength - 1)])
   
   useMotionValueEvent(scrollIndex, "change", (latest: number) => {
-    setActiveIndex(Math.round(latest))
+    const newIndex = Math.round(latest)
+    if (newIndex !== activeIndex) {
+      setActiveIndex(newIndex)
+      onIndexChange?.(newIndex)
+    }
   })
 
   const xTranslation = useTransform(
