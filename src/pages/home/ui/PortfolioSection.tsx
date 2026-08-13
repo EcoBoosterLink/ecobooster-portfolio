@@ -116,7 +116,7 @@ function ProjectCard({ project, index, gridClass }: { project: typeof PROJECTS[0
           whileInView={{ y: 0, opacity: 1 }}
           className="flex flex-col gap-2"
         >
-          <span className="text-xs md:text-sm font-semibold tracking-wider uppercase text-white/70 backdrop-blur-sm border border-white/10 bg-white/10 px-3 py-1.5 rounded-full w-fit">
+          <span className="text-[10px] font-semibold tracking-wider uppercase text-white/70 backdrop-blur-sm border border-white/10 bg-white/10 px-2 py-0.5 rounded-full w-fit">
             {project.category}
           </span>
           <h3 className="text-xl md:text-2xl font-bold tracking-tight">
