@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 class Particle {
   x: number
@@ -14,7 +14,7 @@ class Particle {
     this.y = Math.random() * height
     this.vx = (Math.random() - 0.5) * 0.5
     this.vy = (Math.random() - 0.5) * 0.5
-    this.radius = Math.random() * 1.5 + 0.5 // Taille de la poussière
+    this.radius = Math.random() * 1.5 + 0.5
     this.baseAlpha = Math.random() * 0.5 + 0.1
     this.alpha = this.baseAlpha
   }
@@ -23,15 +23,12 @@ class Particle {
     this.x += this.vx
     this.y += this.vy
 
-    // Rebondir sur les bords
     if (this.x < 0 || this.x > width) this.vx *= -1
     if (this.y < 0 || this.y > height) this.vy *= -1
 
-    // Effet organique : légère dérive aléatoire (bruit)
     this.vx += (Math.random() - 0.5) * 0.02
     this.vy += (Math.random() - 0.5) * 0.02
 
-    // Limiter la vitesse maximale
     const maxSpeed = 1
     const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy)
     if (speed > maxSpeed) {
@@ -39,7 +36,6 @@ class Particle {
       this.vy = (this.vy / speed) * maxSpeed
     }
 
-    // Réaction à la souris (répulsion douce)
     const dx = mouseX - this.x
     const dy = mouseY - this.y
     const distance = Math.sqrt(dx * dx + dy * dy)
@@ -48,9 +44,8 @@ class Particle {
       const force = (150 - distance) / 150
       this.vx -= (dx / distance) * force * 0.5
       this.vy -= (dy / distance) * force * 0.5
-      this.alpha = Math.min(this.baseAlpha * 2, 0.8) // Brille un peu près de la souris
+      this.alpha = Math.min(this.baseAlpha * 2, 0.8)
     } else {
-      // Retour progressif à l'opacité de base
       this.alpha += (this.baseAlpha - this.alpha) * 0.1
     }
   }
@@ -58,7 +53,6 @@ class Particle {
   draw(ctx: CanvasRenderingContext2D, isDarkMode: boolean) {
     ctx.beginPath()
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
-    // Couleur de la poussière selon le thème
     ctx.fillStyle = isDarkMode 
       ? `rgba(255, 255, 255, ${this.alpha})` 
       : `rgba(0, 0, 0, ${this.alpha * 0.6})`
@@ -66,9 +60,7 @@ class Particle {
   }
 }
 
-export default function OrganicBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
+export function useOrganicParticles(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -87,7 +79,6 @@ export default function OrganicBackground() {
       canvas.height = window.innerHeight
       particles = []
       
-      // Nombre de particules de poussière selon la taille de l'écran
       const particleCount = Math.floor((canvas.width * canvas.height) / 8000)
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle(canvas.width, canvas.height))
@@ -97,13 +88,11 @@ export default function OrganicBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Dessiner un fond très subtil (optionnel, on laisse bg-background gérer ça)
       particles.forEach(p => {
         p.update(canvas.width, canvas.height, mouseX, mouseY)
         p.draw(ctx, isDarkMode)
       })
 
-      // Tracer des liens très fins entre les poussières proches (effet réseau/organique)
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
@@ -126,9 +115,7 @@ export default function OrganicBackground() {
       animationFrameId = requestAnimationFrame(animate)
     }
 
-    const handleResize = () => {
-      init()
-    }
+    const handleResize = () => init()
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX
@@ -140,7 +127,6 @@ export default function OrganicBackground() {
       mouseY = -1000
     }
 
-    // Observer les changements de thème
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.attributeName === 'class') {
@@ -164,19 +150,5 @@ export default function OrganicBackground() {
       observer.disconnect()
       cancelAnimationFrame(animationFrameId)
     }
-  }, [])
-
-  return (
-    <div className="pointer-events-none fixed inset-0 z-[-1] bg-background overflow-hidden">
-      {/* Halos lumineux subtils en arrière-plan (statiques) */}
-      <div className="absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/4 translate-x-1/4 rounded-full bg-blue-500/5 blur-[120px] dark:bg-blue-400/5" />
-      <div className="absolute bottom-0 left-0 h-[800px] w-[800px] -translate-x-1/3 translate-y-1/3 rounded-full bg-emerald-500/5 blur-[120px] dark:bg-emerald-400/5" />
-      
-      {/* Le Canvas pour la poussière organique interactive */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 h-full w-full opacity-60"
-      />
-    </div>
-  )
+  }, [canvasRef])
 }
