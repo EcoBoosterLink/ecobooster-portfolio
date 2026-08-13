@@ -28,3 +28,13 @@ export const LiquidTexture = () => (
     />
   </>
 )
+
+export const CosmicTexture = () => (
+  <>
+    <div className="absolute inset-0 bg-gradient-to-br from-[#2a0845] to-[#6441A5] opacity-40 dark:opacity-30 mix-blend-color-dodge" />
+    <div 
+      className="absolute inset-0 opacity-[0.3] mix-blend-screen pointer-events-none" 
+      style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cosmic'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 3 -1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cosmic)'/%3E%3C/svg%3E")` }} 
+    />
+  </>
+)
