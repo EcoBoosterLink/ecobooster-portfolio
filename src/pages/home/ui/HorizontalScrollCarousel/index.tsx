@@ -3,6 +3,7 @@ import { Card } from './components/Card'
 import { type CardType } from './types'
 import { useCarouselScroll } from '../../hooks/useCarouselScroll'
 import { TABS, type TabType } from '../../helpers/constants'
+import { useEffect } from 'react'
 
 export const HorizontalScrollCarousel = ({ 
   cards, 
@@ -17,11 +18,18 @@ export const HorizontalScrollCarousel = ({
 }) => {
   const { targetRef, activeIndex, xTranslation } = useCarouselScroll(cards.length, onActiveIndexChange)
 
+  useEffect(() => {
+    const currentCard = cards[activeIndex]
+    if (currentCard && currentCard.tabId && currentCard.tabId !== activeTab) {
+      setActiveTab(currentCard.tabId)
+    }
+  }, [activeIndex, cards, activeTab, setActiveTab])
+
   return (
     <section id="methodology-carousel" ref={targetRef} className="relative w-full" style={{ height: `${cards.length * 100}vh` }}>
       <style>{`
         html {
-          scroll-snap-type: y proximity;
+          scroll-snap-type: y mandatory;
         }
         .scroll-carousel-container {
           --card-w: 100vw;
@@ -67,7 +75,14 @@ export const HorizontalScrollCarousel = ({
               return (
                 <button 
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => {
+                    setActiveTab(tab.id)
+                    const firstCardIndex = cards.findIndex(c => c.tabId === tab.id)
+                    if (firstCardIndex !== -1 && targetRef.current) {
+                      const topOffset = targetRef.current.offsetTop + (firstCardIndex * window.innerHeight)
+                      window.scrollTo({ top: topOffset, behavior: 'smooth' })
+                    }
+                  }}
                   className="relative flex flex-col items-center justify-center group"
                 >
                   <div 

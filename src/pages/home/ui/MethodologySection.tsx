@@ -1,16 +1,19 @@
 import { useState, useMemo } from 'react'
 import { HorizontalScrollCarousel } from './HorizontalScrollCarousel'
-import { METHODOLOGY_DATA, type TabType } from '../helpers/constants'
+import { METHODOLOGY_DATA, TABS, type TabType } from '../helpers/constants'
 
 export function MethodologySection() {
   const [activeTab, setActiveTab] = useState<TabType>('web')
 
-  const activeCards = useMemo(() => {
-    return METHODOLOGY_DATA[activeTab].map(card => ({
-      ...card,
-      tabId: activeTab
-    }))
-  }, [activeTab])
+  const allCards = useMemo(() => {
+    const cards: (typeof METHODOLOGY_DATA['web'][0] & { tabId: TabType })[] = []
+    TABS.forEach(tab => {
+      METHODOLOGY_DATA[tab.id].forEach(card => {
+        cards.push({ ...card, tabId: tab.id })
+      })
+    })
+    return cards
+  }, [])
 
   return (
     <section className="w-full max-w-screen-2xl px-6 py-32 flex flex-col items-center">
@@ -23,7 +26,7 @@ export function MethodologySection() {
 
       {/* TABS CONTENT - HORIZONTAL STICKY SCROLL WITH EMBEDDED TIMELINE */}
       <div className="w-full">
-        <HorizontalScrollCarousel cards={activeCards} activeTab={activeTab} setActiveTab={setActiveTab} />
+        <HorizontalScrollCarousel cards={allCards} activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </section>
   )
