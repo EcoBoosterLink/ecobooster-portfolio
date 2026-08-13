@@ -1,13 +1,15 @@
 import { useState, useMemo } from 'react'
 import { HorizontalScrollCarousel } from './HorizontalScrollCarousel'
-import { METHODOLOGY_DATA, TABS, type TabType } from '../helpers/constants'
+import { METHODOLOGY_DATA } from '../helpers/constants'
+import { CATEGORIES } from '../../../constants/categories'
+import type { CategoryId } from '../../../constants/categories'
 
 export function MethodologySection() {
-  const [activeTab, setActiveTab] = useState<TabType>('web')
+  const [activeTab, setActiveTab] = useState<CategoryId>('web')
 
   const allCards = useMemo(() => {
-    const cards: (typeof METHODOLOGY_DATA['web'][0] & { tabId: TabType })[] = []
-    TABS.forEach(tab => {
+    const cards: (typeof METHODOLOGY_DATA['web'][0] & { tabId: CategoryId })[] = []
+    CATEGORIES.forEach(tab => {
       METHODOLOGY_DATA[tab.id].forEach(card => {
         cards.push({ ...card, tabId: tab.id })
       })

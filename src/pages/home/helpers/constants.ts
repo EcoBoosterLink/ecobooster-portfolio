@@ -1,4 +1,6 @@
-export const METHODOLOGY_DATA = {
+import type { CategoryId } from '../../../constants/categories'
+
+export const METHODOLOGY_DATA: Record<CategoryId, { id: string; title: string; desc: string }[]> = {
   web: [
     { id: '01', title: 'Audit & Prototypage UX/UI', desc: "Analyse approfondie de votre modèle d'affaires, définition de l'architecture de l'information et création de maquettes haute-fidélité pour des expériences utilisateur sans friction." },
     { id: '02', title: 'Ingénierie & Développement', desc: "Code sur-mesure, robuste et modulaire. Nous utilisons des technologies de pointe (React, Next.js) pour garantir des temps de chargement fulgurants et une sécurité de classe entreprise." },
@@ -20,12 +22,3 @@ export const METHODOLOGY_DATA = {
     { id: '03', title: 'Suivi & Ancrage', desc: "Accompagnement post-formation pour valider les acquis et ancrer les nouvelles méthodologies sur le long terme." },
   ]
 }
-
-export type TabType = keyof typeof METHODOLOGY_DATA
-
-export const TABS: { id: TabType; label: string }[] = [
-  { id: 'web', label: 'Développement Web' },
-  { id: 'mobile', label: 'Applications Mobiles' },
-  { id: 'marketing', label: 'Marketing Digital' },
-  { id: 'formation', label: 'Formation & Conseil' },
-]

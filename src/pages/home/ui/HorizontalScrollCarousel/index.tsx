@@ -2,7 +2,8 @@ import { motion } from 'framer-motion'
 import { Card } from './components/Card'
 import { type CardType } from './types'
 import { useCarouselScroll } from '../../hooks/useCarouselScroll'
-import { TABS, type TabType } from '../../helpers/constants'
+import { CATEGORIES } from '../../../../constants/categories'
+import type { CategoryId } from '../../../../constants/categories'
 import { useEffect } from 'react'
 
 export const HorizontalScrollCarousel = ({ 
@@ -12,8 +13,8 @@ export const HorizontalScrollCarousel = ({
   onActiveIndexChange 
 }: { 
   cards: CardType[]
-  activeTab: TabType
-  setActiveTab: (tab: TabType) => void
+  activeTab: CategoryId
+  setActiveTab: (tab: CategoryId) => void
   onActiveIndexChange?: (index: number) => void
 }) => {
   const { targetRef, activeIndex, xTranslation } = useCarouselScroll(cards.length, onActiveIndexChange)
@@ -67,7 +68,7 @@ export const HorizontalScrollCarousel = ({
             {/* The background line */}
             <div className="absolute top-1/2 left-0 w-full h-[2px] bg-white/10 -translate-y-1/2 rounded-full" />
             
-            {TABS.map((tab) => {
+            {CATEGORIES.map((tab) => {
               const isActive = activeTab === tab.id
               return (
                 <button 
