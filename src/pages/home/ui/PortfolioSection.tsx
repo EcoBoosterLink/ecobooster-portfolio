@@ -107,8 +107,23 @@ function ProjectCard({ project, index, gridClass }: { project: typeof PROJECTS[0
       {/* Subtle Color Tint Overlay */}
       <div className={`absolute inset-0 bg-gradient-to-br ${project.color} mix-blend-overlay opacity-50 group-hover:opacity-80 transition-opacity duration-700`} />
 
+      {/* Subtracting Top-Left Category Pill */}
+      <div className="absolute top-0 left-0 bg-black px-4 py-2.5 rounded-br-2xl z-20 flex items-center justify-center transition-all duration-500">
+        <span className="text-[10px] font-semibold tracking-wider uppercase text-white/70">
+          {project.category}
+        </span>
+        {/* Inverted corner right */}
+        <svg className="absolute top-0 left-full w-5 h-5 text-black pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M0,0 L20,0 A20,20 0 0,0 0,20 Z" />
+        </svg>
+        {/* Inverted corner bottom */}
+        <svg className="absolute top-full left-0 w-5 h-5 text-black pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M0,0 L20,0 A20,20 0 0,0 0,20 Z" />
+        </svg>
+      </div>
+
       {/* Content */}
-      <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end text-white z-10">
+      <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end text-white z-10 pointer-events-none">
         <motion.div 
           layout
           transition={{ layout: { type: "spring", stiffness: 60, damping: 15 } }}
@@ -116,9 +131,6 @@ function ProjectCard({ project, index, gridClass }: { project: typeof PROJECTS[0
           whileInView={{ y: 0, opacity: 1 }}
           className="flex flex-col gap-2"
         >
-          <span className="text-[10px] font-semibold tracking-wider uppercase text-white/70 backdrop-blur-sm border border-white/10 bg-white/10 px-2 py-0.5 rounded-full w-fit">
-            {project.category}
-          </span>
           <h3 className="text-xl md:text-2xl font-bold tracking-tight">
             {project.title}
           </h3>
