@@ -3,6 +3,7 @@ import { ServicesSection } from './ui/ServicesSection'
 import { MethodologySection } from './ui/MethodologySection'
 import { KeyFiguresSection } from './ui/KeyFiguresSection'
 import { PortfolioSection } from './ui/PortfolioSection'
+import { PartnersSection } from './ui/PartnersSection'
 
 export function HomePage() {
   return (
@@ -12,6 +13,7 @@ export function HomePage() {
       <MethodologySection />
       <KeyFiguresSection />
       <PortfolioSection />
+      <PartnersSection />
     </div>
   )
 }

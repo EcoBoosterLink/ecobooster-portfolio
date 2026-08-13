@@ -1,89 +1,15 @@
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { PROJECTS } from '../../../../constants/projects'
 
-import { PROJECTS } from '../../../constants/projects'
-
-function mutateRow(row: number[]) {
-  const newRow = [...row]
-  // Pick a random adjacent pair in this row (0 or 1 since row length is 3)
-  const i = Math.floor(Math.random() * 2)
-  const sum = newRow[i] + newRow[i+1]
-  
-  // Valid bounds: min width 3, max width 9
-  const minA = Math.max(3, sum - 9)
-  const maxA = Math.min(9, sum - 3)
-  
-  // If no valid mutation possible, just return
-  if (minA > maxA) return newRow
-  
-  // Pick a new A that is DIFFERENT from the current A
-  const possibleA = []
-  for (let a = minA; a <= maxA; a++) {
-    if (a !== newRow[i]) possibleA.push(a)
-  }
-  
-  if (possibleA.length === 0) return newRow
-  
-  const pickedA = possibleA[Math.floor(Math.random() * possibleA.length)]
-  newRow[i] = pickedA
-  newRow[i+1] = sum - pickedA
-  
-  return newRow
+interface PortfolioCardProps {
+  project: typeof PROJECTS[0]
+  index: number
+  gridClass: string
 }
 
-export function PortfolioSection() {
-  const [rows, setRows] = useState([
-    [4, 4, 4], // Row 0
-    [4, 4, 4], // Row 1
-    [4, 4, 4]  // Row 2
-  ])
-
-  // Randomize a localized part of the layout every 2 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRows(prevRows => {
-        const newRows = [...prevRows]
-        // Pick one random row to mutate so the user isn't overwhelmed
-        const rowIndexToMutate = Math.floor(Math.random() * 3)
-        newRows[rowIndexToMutate] = mutateRow(newRows[rowIndexToMutate])
-        return newRows
-      })
-    }, 2000)
-    return () => clearInterval(interval)
-  }, [])
-
-  // Flatten the rows into an array of 12 col-span classes
-  const flatLayout = rows.flatMap(row => row.map(span => `md:col-span-${span}`))
-
+export function PortfolioCard({ project, index, gridClass }: PortfolioCardProps) {
   return (
-    <section className="w-full py-32 flex flex-col items-center overflow-hidden">
-      <div className="w-full max-w-screen-2xl px-6 mb-16 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Nos Réalisations</h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Découvrez une sélection de projets qui repoussent les limites de l'expérience numérique.
-        </p>
-      </div>
-
-      <div className="w-full max-w-screen-2xl px-6">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 grid-flow-row-dense auto-rows-[250px] md:auto-rows-[300px]">
-          {PROJECTS.map((project, index) => (
-            <ProjectCard 
-              key={project.id} 
-              project={project} 
-              index={index} 
-              gridClass={flatLayout[index]} 
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ProjectCard({ project, index, gridClass }: { project: typeof PROJECTS[0], index: number, gridClass: string }) {
-
-  return (
-    <motion.div 
+    <motion.div
       layout
       initial={{ opacity: 0, y: 50, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -93,7 +19,7 @@ function ProjectCard({ project, index, gridClass }: { project: typeof PROJECTS[0
     >
       {/* Background Image with Parallax/Scale effect on hover */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <motion.div 
+        <motion.div
           layout
           transition={{ layout: { type: "spring", stiffness: 60, damping: 15 } }}
           className="w-full h-full bg-cover bg-center transition-transform duration-1000 ease-[0.16,1,0.3,1] group-hover:scale-110"
@@ -103,7 +29,7 @@ function ProjectCard({ project, index, gridClass }: { project: typeof PROJECTS[0
 
       {/* Gradient Overlay */}
       <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 opacity-80 group-hover:opacity-100`} />
-      
+
       {/* Subtle Color Tint Overlay */}
       <div className={`absolute inset-0 bg-gradient-to-br ${project.color} mix-blend-overlay opacity-50 group-hover:opacity-80 transition-opacity duration-700`} />
 
@@ -124,7 +50,7 @@ function ProjectCard({ project, index, gridClass }: { project: typeof PROJECTS[0
 
       {/* Content */}
       <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end text-white z-10 pointer-events-none">
-        <motion.div 
+        <motion.div
           layout
           transition={{ layout: { type: "spring", stiffness: 60, damping: 15 } }}
           initial={{ y: 20, opacity: 0 }}
@@ -140,7 +66,7 @@ function ProjectCard({ project, index, gridClass }: { project: typeof PROJECTS[0
       {/* Hover "Voir le projet" button */}
       <div className="absolute top-8 right-8 z-10 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-x-4 group-hover:translate-x-0">
         <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
         </div>
       </div>
     </motion.div>
