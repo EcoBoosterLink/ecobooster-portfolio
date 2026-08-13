@@ -5,13 +5,13 @@ import { PROJECTS } from '../../../constants/projects'
 
 function mutateRow(row: number[]) {
   const newRow = [...row]
-  // Pick a random adjacent pair in this row (0, 1, or 2 since row length is 4)
-  const i = Math.floor(Math.random() * 3)
+  // Pick a random adjacent pair in this row (0 or 1 since row length is 3)
+  const i = Math.floor(Math.random() * 2)
   const sum = newRow[i] + newRow[i+1]
   
-  // Valid bounds: min width 2, max width 10
-  const minA = Math.max(2, sum - 10)
-  const maxA = Math.min(10, sum - 2)
+  // Valid bounds: min width 3, max width 9
+  const minA = Math.max(3, sum - 9)
+  const maxA = Math.min(9, sum - 3)
   
   // If no valid mutation possible, just return
   if (minA > maxA) return newRow
@@ -33,9 +33,9 @@ function mutateRow(row: number[]) {
 
 export function PortfolioSection() {
   const [rows, setRows] = useState([
-    [3, 3, 3, 3], // Row 0
-    [3, 3, 3, 3], // Row 1
-    [3, 3, 3, 3]  // Row 2
+    [4, 4, 4], // Row 0
+    [4, 4, 4], // Row 1
+    [4, 4, 4]  // Row 2
   ])
 
   // Randomize a localized part of the layout every 2 seconds

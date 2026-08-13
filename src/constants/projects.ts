@@ -7,8 +7,5 @@ export const PROJECTS = [
   { id: 6, title: 'Logistics UI', category: 'Développement Web', image: 'https://images.unsplash.com/photo-1586528116311-ad8ed7c80a30?q=80&w=1000&auto=format&fit=crop', color: 'from-cyan-500/20 to-blue-500/20' },
   { id: 7, title: 'Real Estate', category: 'Marketing Digital', image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1000&auto=format&fit=crop', color: 'from-amber-500/20 to-yellow-500/20' },
   { id: 8, title: 'EdTech Platform', category: 'Formation & Conseil', image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1000&auto=format&fit=crop', color: 'from-violet-500/20 to-fuchsia-500/20' },
-  { id: 9, title: 'Fitness Tracker', category: 'Applications Mobiles', image: 'https://images.unsplash.com/photo-1526506114642-54cb35860bbf?q=80&w=1000&auto=format&fit=crop', color: 'from-lime-500/20 to-green-500/20' },
-  { id: 10, title: 'Travel Agency', category: 'Marketing Digital', image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1000&auto=format&fit=crop', color: 'from-sky-500/20 to-indigo-500/20' },
-  { id: 11, title: 'Crypto Wallet', category: 'Développement Web', image: 'https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=1000&auto=format&fit=crop', color: 'from-indigo-500/20 to-blue-500/20' },
-  { id: 12, title: 'Corporate Training', category: 'Formation & Conseil', image: 'https://images.unsplash.com/photo-1616803140344-6682afb13cda?q=80&w=1000&auto=format&fit=crop', color: 'from-red-500/20 to-orange-500/20' }
+  { id: 9, title: 'Fitness Tracker', category: 'Applications Mobiles', image: 'https://images.unsplash.com/photo-1526506114642-54cb35860bbf?q=80&w=1000&auto=format&fit=crop', color: 'from-lime-500/20 to-green-500/20' }
 ]
