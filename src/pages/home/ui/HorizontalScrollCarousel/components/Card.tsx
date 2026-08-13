@@ -3,15 +3,16 @@ import { type CardType } from '../types'
 
 export const Card = ({ card, index, activeIndex }: { card: CardType; index: number; activeIndex: number }) => {
   const isActive = index === activeIndex
+  const isNearActive = Math.abs(index - activeIndex) <= 1
   
   return (
     <div 
       className={`group relative h-[100vh] w-[100vw] shrink-0 overflow-hidden bg-background/50 p-10 pt-48 md:p-24 md:pt-48 border-none backdrop-blur-xl transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-50'}`}
     >
-      {card.tabId === 'web' && <SilkTexture />}
-      {card.tabId === 'mobile' && <GoldMetalTexture />}
-      {card.tabId === 'marketing' && <GradientBlindsTexture />}
-      {card.tabId === 'formation' && <GradientWavesTexture />}
+      {isNearActive && card.tabId === 'web' && <SilkTexture />}
+      {isNearActive && card.tabId === 'mobile' && <GoldMetalTexture />}
+      {isNearActive && card.tabId === 'marketing' && <GradientBlindsTexture />}
+      {isNearActive && card.tabId === 'formation' && <GradientWavesTexture />}
       
       <div className="absolute -inset-px rounded-none bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
