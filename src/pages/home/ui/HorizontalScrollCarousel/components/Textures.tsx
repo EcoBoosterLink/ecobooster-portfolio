@@ -1,25 +1,21 @@
 import MoltenMetal from './MoltenMetal'
 import Waves from './Waves'
 import Aurora from './Aurora'
-import Lightfall from './Lightfall'
+import GradientBlinds from './GradientBlinds'
 import Silk from './Silk'
 
-// ─── Lightfall (Web) ────────────────────────────────────────────────────────
-// Matrix/Data streams falling
-export const LightfallTexture = () => (
-  <Lightfall 
-    colors={['#0066ff', '#5227FF', '#a0d8ff']}
-    backgroundColor="#00030a"
-    speed={0.4}
-    streakCount={3}
-    streakWidth={2}
-    streakLength={1.5}
-    glow={1.5}
-    density={0.5}
-    twinkle={1.2}
-    zoom={2.5}
-    backgroundGlow={0.3}
-    opacity={0.8}
+// ─── Gradient Blinds (Marketing) ────────────────────────────────────────────
+// Futuristic layered blinds effect
+export const GradientBlindsTexture = () => (
+  <GradientBlinds 
+    gradientColors={['#0066ff', '#5227FF', '#a0d8ff']}
+    angle={45}
+    noise={0.4}
+    blindCount={12}
+    blindMinWidth={40}
+    spotlightRadius={0.6}
+    spotlightSoftness={1.5}
+    spotlightOpacity={0.8}
   />
 )
 

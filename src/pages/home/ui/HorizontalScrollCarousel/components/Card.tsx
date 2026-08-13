@@ -1,4 +1,4 @@
-import { LightfallTexture, GoldMetalTexture, SilkTexture, GradientWavesTexture } from './Textures'
+import { GradientBlindsTexture, GoldMetalTexture, SilkTexture, GradientWavesTexture } from './Textures'
 import { type CardType } from '../types'
 
 export const Card = ({ card, index, activeIndex }: { card: CardType; index: number; activeIndex: number }) => {
@@ -10,10 +10,10 @@ export const Card = ({ card, index, activeIndex }: { card: CardType; index: numb
     >
       {card.tabId === 'web' && <SilkTexture />}
       {card.tabId === 'mobile' && <GoldMetalTexture />}
-      {card.tabId === 'marketing' && <LightfallTexture />}
+      {card.tabId === 'marketing' && <GradientBlindsTexture />}
       {card.tabId === 'formation' && <GradientWavesTexture />}
       
-      <div className="absolute -inset-px rounded-[3rem] bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      <div className="absolute -inset-px rounded-none bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
       <div className="relative z-10 h-full flex flex-col justify-between mix-blend-normal">
          <div className="flex justify-between items-start">
