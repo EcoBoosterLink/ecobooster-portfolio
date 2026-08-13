@@ -1,27 +1,25 @@
 import MoltenMetal from './MoltenMetal'
+import Waves from './Waves'
+import Aurora from './Aurora'
+import Lightfall from './Lightfall'
+import Silk from './Silk'
 
-// ─── Liquid / Water (Web) ───────────────────────────────────────────────────
-// Deep ocean blues — dark navy → electric blue → icy white
-export const LiquidTexture = () => (
-  <MoltenMetal
-    color1="#001a3a"
-    color2="#0066ff"
-    color3="#a0d8ff"
-    speed={0.2}
-    scale={3.5}
-    detail={4}
-    glow={1.8}
-    coreSize={0.12}
-    swirl={1.2}
-    fold={-0.18}
-    blackPoint={0.04}
-    brightness={1.1}
-    colorMode="molten"
-    grain={true}
-    grainIntensity={0.04}
-    mouseInteraction={true}
-    mouseStrength={0.25}
-    opacity={0.85}
+// ─── Lightfall (Web) ────────────────────────────────────────────────────────
+// Matrix/Data streams falling
+export const LightfallTexture = () => (
+  <Lightfall 
+    colors={['#0066ff', '#5227FF', '#a0d8ff']}
+    backgroundColor="#00030a"
+    speed={0.4}
+    streakCount={3}
+    streakWidth={2}
+    streakLength={1.5}
+    glow={1.5}
+    density={0.5}
+    twinkle={1.2}
+    zoom={2.5}
+    backgroundGlow={0.3}
+    opacity={0.8}
   />
 )
 
@@ -50,7 +48,19 @@ export const GoldMetalTexture = () => (
   />
 )
 
-// ─── Sand / Desert (Marketing) ───────────────────────────────────────────────
+// ─── Silk (Marketing) ────────────────────────────────────────────────────────
+// Smooth elegant waves — premium branding feel
+export const SilkTexture = () => (
+  <Silk 
+    speed={2} 
+    scale={0.8} 
+    color="#FF3366" 
+    noiseIntensity={0.8} 
+    rotation={0.5}
+  />
+)
+
+// ─── Sand / Desert (Alt Marketing) ───────────────────────────────────────────
 // Dune sands — deep terracotta → warm sand → bleached white
 export const SandTexture = () => (
   <MoltenMetal
@@ -76,26 +86,30 @@ export const SandTexture = () => (
 )
 
 // ─── Cosmic / Formation ──────────────────────────────────────────────────────
-// Deep space plasma — void black → electric violet → nebula white
+// Gradient Waves / Aurora style
 export const CosmicTexture = () => (
-  <MoltenMetal
-    color1="#04010e"
-    color2="#5227ff"
-    color3="#e8d5ff"
-    speed={0.18}
-    scale={3}
-    detail={5}
-    glow={2.2}
-    coreSize={0.1}
-    swirl={1.5}
-    fold={-0.25}
-    blackPoint={0.03}
-    brightness={1.0}
-    colorMode="frost"
-    grain={true}
-    grainIntensity={0.05}
-    mouseInteraction={true}
-    mouseStrength={0.3}
-    opacity={0.88}
+  <Aurora 
+    colorStops={['#04010e', '#5227ff', '#1a0033']}
+    amplitude={1.2}
+    blend={0.6}
+    speed={0.5}
+  />
+)
+
+// ─── Waves Alternative ──────────────────────────────────────────────────────
+// Pure line-based waves if preferred
+export const GradientWavesTexture = () => (
+  <Waves 
+    lineColor="#5227ff"
+    backgroundColor="#04010e"
+    waveSpeedX={0.02}
+    waveSpeedY={0.01}
+    waveAmpX={40}
+    waveAmpY={20}
+    friction={0.9}
+    tension={0.01}
+    maxCursorMove={120}
+    xGap={12}
+    yGap={36}
   />
 )

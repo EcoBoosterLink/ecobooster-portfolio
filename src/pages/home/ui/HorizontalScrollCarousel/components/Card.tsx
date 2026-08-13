@@ -1,4 +1,4 @@
-import { LiquidTexture, GoldMetalTexture, SandTexture, CosmicTexture } from './Textures'
+import { LightfallTexture, GoldMetalTexture, SilkTexture, GradientWavesTexture } from './Textures'
 import { type CardType } from '../types'
 
 export const Card = ({ card, index, activeIndex }: { card: CardType; index: number; activeIndex: number }) => {
@@ -8,10 +8,10 @@ export const Card = ({ card, index, activeIndex }: { card: CardType; index: numb
     <div 
       className={`group relative h-[100vh] w-[100vw] shrink-0 overflow-hidden bg-background/50 p-10 pt-48 md:p-24 md:pt-48 border-none backdrop-blur-xl transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-50'}`}
     >
-      {card.tabId === 'web' && <LiquidTexture />}
+      {card.tabId === 'web' && <SilkTexture />}
       {card.tabId === 'mobile' && <GoldMetalTexture />}
-      {card.tabId === 'marketing' && <SandTexture />}
-      {card.tabId === 'formation' && <CosmicTexture />}
+      {card.tabId === 'marketing' && <LightfallTexture />}
+      {card.tabId === 'formation' && <GradientWavesTexture />}
       
       <div className="absolute -inset-px rounded-[3rem] bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
