@@ -2,10 +2,11 @@ import { Link } from '@tanstack/react-router'
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/60 backdrop-blur-xl">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <span className="font-bold text-xl tracking-tight">ecobooster link</span>
+          <img src="/logo.png" alt="Ecobooster Link Logo" className="h-8 w-auto object-contain" />
+          <span className="font-bold text-xl tracking-tight hidden sm:inline-block">ecobooster link</span>
         </Link>
         <nav className="flex items-center gap-6 text-sm font-medium">
           <Link to="/" className="transition-colors hover:text-foreground/80 text-foreground/60">
