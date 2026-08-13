@@ -71,7 +71,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased transition-colors duration-700 ease-in-out;
     letter-spacing: -0.02em; /* Apple typography tends to have tight tracking on big text */
   }
   h1, h2, h3, h4, h5, h6 {

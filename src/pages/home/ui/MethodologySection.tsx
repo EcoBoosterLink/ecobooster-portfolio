@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
 import { HorizontalScrollCarousel } from './HorizontalScrollCarousel'
-import { METHODOLOGY_DATA, TABS, type TabType } from '../helpers/constants'
+import { METHODOLOGY_DATA, type TabType } from '../helpers/constants'
 
 export function MethodologySection() {
   const [activeTab, setActiveTab] = useState<TabType>('web')
@@ -22,31 +21,9 @@ export function MethodologySection() {
         </p>
       </div>
 
-      {/* TABS HEADER (STEPPER) */}
-      <div className="sticky top-32 z-50 flex flex-wrap justify-center gap-2 mb-16 bg-white/10 dark:bg-black/20 p-1.5 rounded-full border border-neutral-800/20 dark:border-white/10 backdrop-blur-xl shadow-lg max-w-fit mx-auto">
-        {TABS.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`relative px-6 py-3 rounded-full text-sm font-medium transition-colors ${
-              activeTab === tab.id ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
-            }`}
-          >
-            {activeTab === tab.id && (
-              <motion.div
-                layoutId="active-tab-indicator"
-                className="absolute inset-0 bg-secondary rounded-full shadow-sm border border-white/10"
-                transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-              />
-            )}
-            <span className="relative z-10">{tab.label}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* TABS CONTENT - HORIZONTAL STICKY SCROLL */}
-      <div className="w-full mt-10">
-        <HorizontalScrollCarousel cards={activeCards} />
+      {/* TABS CONTENT - HORIZONTAL STICKY SCROLL WITH EMBEDDED TIMELINE */}
+      <div className="w-full">
+        <HorizontalScrollCarousel cards={activeCards} activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </section>
   )

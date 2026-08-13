@@ -1,40 +1,101 @@
-export const SandTexture = () => (
-  <>
-    <div className="absolute inset-0 bg-gradient-to-br from-[#e5d9c5] via-[#d4c3a3] to-[#b3a182] opacity-30 dark:opacity-20 mix-blend-multiply dark:mix-blend-screen" />
-    <div 
-      className="absolute inset-0 opacity-[0.2] mix-blend-overlay pointer-events-none" 
-      style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sand'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sand)'/%3E%3C/svg%3E")` }} 
-    />
-  </>
-)
+import MoltenMetal from './MoltenMetal'
 
-export const GoldMetalTexture = () => (
-  <>
-    <div className="absolute inset-0 bg-[linear-gradient(135deg,#BF953F_0%,#FCF6BA_25%,#B38728_50%,#FBF5B7_75%,#AA771C_100%)] opacity-30 dark:opacity-20 mix-blend-color-dodge" />
-    <div 
-      className="absolute inset-0 opacity-[0.15] mix-blend-overlay pointer-events-none" 
-      style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='metal'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01 0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23metal)'/%3E%3C/svg%3E")` }} 
-    />
-    <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent" />
-  </>
-)
-
+// ─── Liquid / Water (Web) ───────────────────────────────────────────────────
+// Deep ocean blues — dark navy → electric blue → icy white
 export const LiquidTexture = () => (
-  <>
-    <div className="absolute inset-0 bg-gradient-to-br from-[#00f2fe] to-[#4facfe] opacity-30 dark:opacity-20 mix-blend-color-dodge" />
-    <div 
-      className="absolute inset-0 opacity-[0.4] mix-blend-overlay pointer-events-none" 
-      style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='liquid'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 4 -1.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23liquid)'/%3E%3C/svg%3E")` }} 
-    />
-  </>
+  <MoltenMetal
+    color1="#001a3a"
+    color2="#0066ff"
+    color3="#a0d8ff"
+    speed={0.2}
+    scale={3.5}
+    detail={4}
+    glow={1.8}
+    coreSize={0.12}
+    swirl={1.2}
+    fold={-0.18}
+    blackPoint={0.04}
+    brightness={1.1}
+    colorMode="molten"
+    grain={true}
+    grainIntensity={0.04}
+    mouseInteraction={true}
+    mouseStrength={0.25}
+    opacity={0.85}
+  />
 )
 
+// ─── Metallic / Gold (Mobile) ────────────────────────────────────────────────
+// Molten gold — dark bronze → liquid gold → white-hot core
+export const GoldMetalTexture = () => (
+  <MoltenMetal
+    color1="#1a0800"
+    color2="#b8860b"
+    color3="#fff5cc"
+    speed={0.25}
+    scale={4}
+    detail={4}
+    glow={2.0}
+    coreSize={0.08}
+    swirl={0.8}
+    fold={-0.22}
+    blackPoint={0.03}
+    brightness={1.4}
+    colorMode="ember"
+    grain={true}
+    grainIntensity={0.06}
+    mouseInteraction={true}
+    mouseStrength={0.2}
+    opacity={0.9}
+  />
+)
+
+// ─── Sand / Desert (Marketing) ───────────────────────────────────────────────
+// Dune sands — deep terracotta → warm sand → bleached white
+export const SandTexture = () => (
+  <MoltenMetal
+    color1="#1c0a00"
+    color2="#c47a2b"
+    color3="#f5e4c3"
+    speed={0.15}
+    scale={5}
+    detail={3}
+    glow={1.5}
+    coreSize={0.15}
+    swirl={0.6}
+    fold={-0.15}
+    blackPoint={0.06}
+    brightness={1.2}
+    colorMode="molten"
+    grain={true}
+    grainIntensity={0.08}
+    mouseInteraction={true}
+    mouseStrength={0.15}
+    opacity={0.8}
+  />
+)
+
+// ─── Cosmic / Formation ──────────────────────────────────────────────────────
+// Deep space plasma — void black → electric violet → nebula white
 export const CosmicTexture = () => (
-  <>
-    <div className="absolute inset-0 bg-gradient-to-br from-[#2a0845] to-[#6441A5] opacity-40 dark:opacity-30 mix-blend-color-dodge" />
-    <div 
-      className="absolute inset-0 opacity-[0.3] mix-blend-screen pointer-events-none" 
-      style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cosmic'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 3 -1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cosmic)'/%3E%3C/svg%3E")` }} 
-    />
-  </>
+  <MoltenMetal
+    color1="#04010e"
+    color2="#5227ff"
+    color3="#e8d5ff"
+    speed={0.18}
+    scale={3}
+    detail={5}
+    glow={2.2}
+    coreSize={0.1}
+    swirl={1.5}
+    fold={-0.25}
+    blackPoint={0.03}
+    brightness={1.0}
+    colorMode="frost"
+    grain={true}
+    grainIntensity={0.05}
+    mouseInteraction={true}
+    mouseStrength={0.3}
+    opacity={0.88}
+  />
 )

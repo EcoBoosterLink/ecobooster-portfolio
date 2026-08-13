@@ -1,8 +1,8 @@
 export const METHODOLOGY_DATA = {
   web: [
-    { id: '01', title: 'Audit & Maquettage', desc: "Nous analysons vos besoins et concevons des prototypes interactifs pour valider l'ergonomie avant toute ligne de code." },
-    { id: '02', title: 'Développement Sur-mesure', desc: "Nos ingénieurs créent une architecture robuste, rapide et sécurisée, en utilisant les meilleurs frameworks modernes (React, Node.js)." },
-    { id: '03', title: 'Tests & Déploiement', desc: "Phase de recette rigoureuse pour garantir l'absence de bugs, suivie d'une mise en production fluide." },
+    { id: '01', title: 'Audit & Prototypage UX/UI', desc: "Analyse approfondie de votre modèle d'affaires, définition de l'architecture de l'information et création de maquettes haute-fidélité pour des expériences utilisateur sans friction." },
+    { id: '02', title: 'Ingénierie & Développement', desc: "Code sur-mesure, robuste et modulaire. Nous utilisons des technologies de pointe (React, Next.js) pour garantir des temps de chargement fulgurants et une sécurité de classe entreprise." },
+    { id: '03', title: 'QA, Déploiement & Scaling', desc: "Tests automatisés rigoureux, optimisation SEO et intégration continue. Un lancement parfaitement orchestré, conçu pour scalabiliser avec la croissance de votre trafic." },
   ],
   mobile: [
     { id: '01', title: 'UX/UI Design Natif', desc: "Conception d'interfaces fluides respectant les guidelines strictes d'Apple (Human Interface) et de Google (Material Design)." },
