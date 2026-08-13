@@ -57,7 +57,7 @@ export const HorizontalScrollCarousel = ({
           className="flex h-full pointer-events-auto"
         >
           {cards.map((card, index) => (
-            <Card card={card} index={index} activeIndex={activeIndex} key={card.id} />
+            <Card card={card} index={index} activeIndex={activeIndex} key={`${card.tabId}-${card.id}`} />
           ))}
         </motion.div>
 
