@@ -3,13 +3,15 @@ import { useRef, useEffect } from 'react'
 
 const AnimatedNumber = ({ value }: { value: number }) => {
   const ref = useRef<HTMLSpanElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { once: false, margin: "-100px" })
   const spring = useSpring(0, { bounce: 0, duration: 2500 })
   const display = useTransform(spring, (current) => Math.floor(current))
   
   useEffect(() => {
     if (isInView) {
       spring.set(value)
+    } else {
+      spring.set(0)
     }
   }, [isInView, value, spring])
   
@@ -38,7 +40,7 @@ export function KeyFiguresSection() {
             key={index}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.8, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center text-center group"
           >
