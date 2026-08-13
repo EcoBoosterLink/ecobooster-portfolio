@@ -4,7 +4,7 @@ import { PARTNERS } from '../../../constants/partners'
 
 export function PartnersSection() {
   return (
-    <section className="w-full py-24 md:py-32 bg-black relative overflow-hidden">
+    <section className="w-full pt-24 md:pt-32 pb-4 md:pb-8 bg-black relative overflow-hidden">
       
       {/* Background gradients for smooth transition */}
       <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />

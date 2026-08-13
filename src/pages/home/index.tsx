@@ -4,6 +4,7 @@ import { MethodologySection } from './ui/MethodologySection'
 import { KeyFiguresSection } from './ui/KeyFiguresSection'
 import { PortfolioSection } from './ui/PortfolioSection'
 import { PartnersSection } from './ui/PartnersSection'
+import { CTASection } from './ui/CTASection'
 
 export function HomePage() {
   return (
@@ -14,6 +15,7 @@ export function HomePage() {
       <KeyFiguresSection />
       <PortfolioSection />
       <PartnersSection />
+      <CTASection />
     </div>
   )
 }
