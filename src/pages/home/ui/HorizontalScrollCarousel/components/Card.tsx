@@ -1,4 +1,3 @@
-import { GooeyTextBox } from './GooeyTextBox'
 import { LiquidTexture, GoldMetalTexture, SandTexture, CosmicTexture } from './Textures'
 import { type CardType } from '../types'
 
@@ -26,11 +25,11 @@ export const Card = ({ card, index, activeIndex }: { card: CardType; index: numb
             </span>
          </div>
          
-         <GooeyTextBox index={index}>
-            <p className="text-2xl md:text-4xl text-foreground leading-relaxed font-medium">
+         <div className="max-w-4xl pb-16 md:pb-24">
+            <p className="text-2xl md:text-4xl text-foreground leading-relaxed font-medium drop-shadow-md">
                 {card.desc}
             </p>
-         </GooeyTextBox>
+         </div>
       </div>
     </div>
   )
