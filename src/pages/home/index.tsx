@@ -1,6 +1,7 @@
 import { HeroSection } from './ui/HeroSection'
 import { ServicesSection } from './ui/ServicesSection'
 import { MethodologySection } from './ui/MethodologySection'
+import { KeyFiguresSection } from './ui/KeyFiguresSection'
 
 export function HomePage() {
   return (
@@ -8,6 +9,7 @@ export function HomePage() {
       <HeroSection />
       <ServicesSection />
       <MethodologySection />
+      <KeyFiguresSection />
     </div>
   )
 }

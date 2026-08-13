@@ -15,7 +15,7 @@ export const Card = ({ card, index, activeIndex }: { card: CardType; index: numb
       
       <div className="absolute -inset-px rounded-none bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-      <div className="relative z-10 h-full flex flex-col justify-between mix-blend-normal">
+      <div className="relative z-10 h-full flex flex-col justify-between mix-blend-normal pointer-events-none">
          <div className="flex justify-between items-start">
             <h3 className="text-5xl md:text-7xl lg:text-8xl font-bold max-w-5xl text-foreground tracking-tight drop-shadow-md">
               {card.title}

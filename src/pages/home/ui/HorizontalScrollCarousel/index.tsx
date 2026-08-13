@@ -28,9 +28,6 @@ export const HorizontalScrollCarousel = ({
   return (
     <section id="methodology-carousel" ref={targetRef} className="relative w-full" style={{ height: `${cards.length * 100}vh` }}>
       <style>{`
-        html {
-          scroll-snap-type: y mandatory;
-        }
         .scroll-carousel-container {
           --card-w: 100vw;
           --card-gap: 0px;
